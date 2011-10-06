@@ -1,12 +1,4 @@
-class monit {
-  package {"monit":
-    ensure => present
-  }
-
-  service {"monit":
-    ensure  => running,
-    require => Package["monit"]
-  }
+class monit::debian inherits monit::base {
 
   file {"/etc/default/monit":
     ensure => present,
@@ -31,9 +23,4 @@ class monit {
     require => Package["monit"],
   }
 
-  # Monit doesn't start when monitrc.d/ is empty
-  monit::config{"default":
-    ensure  => present,
-    content => "",
-  }
 }
