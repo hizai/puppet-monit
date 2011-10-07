@@ -2,13 +2,13 @@ class monit::debian inherits monit::base {
 
   file {"/etc/default/monit":
     ensure => present,
-    source => "puppet:///monit/monit.default",
+    source => "puppet:///modules/monit/monit.default",
     require => Package["monit"],
   }
 
   file {"/etc/monit/monitrc":
     ensure => present,
-    source => "puppet:///monit/monitrc",
+    source => "puppet:///modules/monit/monitrc",
     owner  => root,
     group  => root,
     mode   => 600,
