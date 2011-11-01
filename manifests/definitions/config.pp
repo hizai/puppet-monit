@@ -1,9 +1,3 @@
-exec { 'monit-restart-all':
-  command => "monit restart all",
-  path => "/usr/local/bin:/bin:/usr/bin",
-  refreshonly => true
-}
-
 define monit::config($ensure, $content = false, $source = false, $template = true) {
 
   case $operatingsystem {
