@@ -1,3 +1,9 @@
+exec { 'monit-restart-all':
+  command => "monit restart all",
+  path => "/usr/local/bin:/bin:/usr/bin",
+  refreshonly => true
+}
+
 define monit::config($ensure, $content = false, $source = false, $template = true) {
 
   case $operatingsystem {
@@ -7,12 +13,6 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
     "Debian","Ubuntu": {
       $filename = "/etc/monit/monitrc.d/puppet-${name}.conf"
     }
-  }
-
-  exec { 'monit-restart-all':
-    command => "monit restart all",
-    path => "/usr/local/bin:/bin:/usr/bin",
-    refreshonly => true
   }
 
   case $ensure {
