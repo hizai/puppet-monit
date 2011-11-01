@@ -19,7 +19,7 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
           group  => root,
           mode   => 600,
           notify => [ Service["monit"], Exec["monit-restart-all"] ],
-          require => [ Package["monit"], Exec["monit-restart-all"] ]
+          require => [ Package["monit"] ]
         }
       } else {
         if $content
@@ -32,7 +32,7 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
               owner   => root,
               group   => root,
               mode    => 600,
-              notify => [ Service["monit"], Exec["monit-restart-all"] ],               require => [ Package["monit"], Exec["monit-restart-all"] ]
+              notify => [ Service["monit"], Exec["monit-restart-all"] ],               require => [ Package["monit"] ]
             }
           }
           else
