@@ -18,7 +18,7 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
           owner  => root,
           group  => root,
           mode   => 600,
-          notify => [ Service["monit"], Exec["monit-restart-all"] ],
+          notify => [ Service["monit"] ],
           require => [ Package["monit"] ]
         }
       } else {
@@ -32,7 +32,8 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
               owner   => root,
               group   => root,
               mode    => 600,
-              notify => [ Service["monit"], Exec["monit-restart-all"] ],               require => [ Package["monit"] ]
+              notify => [ Service["monit"] ],
+              require => [ Package["monit"] ]
             }
           }
           else

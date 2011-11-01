@@ -6,12 +6,13 @@ class monit::base {
 
   service {"monit":
     ensure  => running,
-    require => Package["monit"]
+    require => Package["monit"],
   }
 
   exec { 'monit-restart-all':
     command => "monit restart all",
     path => "/usr/local/bin:/bin:/usr/bin",
+    subscribe => Service["monit"],
     refreshonly => true
   }
 
