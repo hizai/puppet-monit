@@ -9,6 +9,12 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
     }
   }
 
+  exec { 'monit-restart-all':
+    command => "monit restart all",
+    path => "/usr/local/bin:/bin:/usr/bin",
+    refreshonly => true
+  }
+
   case $ensure {
     present: {
       if $source {
@@ -19,7 +25,8 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
           group  => root,
           mode   => 600,
           notify => Service["monit"],
-          require => Package["monit"],
+          notify => Exec["monit-restart-all"],
+          require => [ Package["monit"], Exec["monit-restart-all"] ]
         }
       } else {
         if $content
@@ -33,7 +40,8 @@ define monit::config($ensure, $content = false, $source = false, $template = tru
               group   => root,
               mode    => 600,
               notify  => Service["monit"],
-              require => Package["monit"],
+              notify => Exec["monit-restart-all"],
+              require => [ Package["monit"], Exec["monit-restart-all"] ]
             }
           }
           else
