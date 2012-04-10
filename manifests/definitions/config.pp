@@ -1,7 +1,7 @@
 define monit::config($ensure, $content = false, $source = false, $template = true) {
 
   case $operatingsystem {
-    "Centos","RedHat","Linux": {
+    "Centos","RedHat","Amazon","Linux": {
       $filename = "/etc/monit.d/puppet-${name}.conf"
     }
     "Debian","Ubuntu": {

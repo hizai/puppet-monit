@@ -27,7 +27,7 @@ Examples:
 class monit {
   case $operatingsystem {
     "Debian","Ubuntu": { include monit::debian }
-    "Centos","RedHat","Linux": { include monit::redhat }
+    "Centos","RedHat","Amazon","Linux": { include monit::redhat }
     default: { fail "Unknown $operatingsystem" }
   }
 }
