@@ -6,6 +6,7 @@ class monit::base {
 
   service {"monit":
     ensure  => running,
+    hasstatus => false,
     require => Package["monit"],
   }
 
